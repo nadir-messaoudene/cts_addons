@@ -40,8 +40,11 @@ class ProductTemplate(models.Model):
                                    ('-20', '-20 °C'),
                                    ('-60', '-60 °C'),
                                    ('-80', '-80 °C')]
-
     product_type = fields.Selection(_type_selection_list, string='Type', default='none', store=True)
     cdt = fields.Char(string='CDT', store=True)
     temperatur_type = fields.Selection(_temperature_selection_list, string='Temperature', required=True, store=True)
+
     famille = fields.Selection(_famille_selection_list, string='Famille', default='none', store=True)
+
+    quantity_pi = fields.Integer(string='Quantity PI', store=True)
+    tarif_douane = fields.Char(string='Tarif Douanlier', store=True)
