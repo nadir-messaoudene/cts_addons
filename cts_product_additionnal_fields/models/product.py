@@ -50,16 +50,6 @@ class ProductTemplate(models.Model):
     quantity_pi = fields.Integer(string='Quantity PI', store=True)
     tarif_douane = fields.Char(string='Tarif Douanlier', store=True)
 
-    @api.onchange('cdt')
-    def _compute_CDT(self):
-        if not (self.cdt):
-            return
-        if self.cdt < 0 or self.cdt > 20000 :
-            return {'warning' :{
-                'title':"Incorrect Intiger value",
-                'message':"La valeur est negative ou superieur a 20 000",
-            }}
-
     @api.onchange('quantity_pi')
     def _compute_quantity_pi(self):
         if not (self.quantity_pi):
