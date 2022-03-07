@@ -44,23 +44,4 @@ class ProductTemplate(models.Model):
     product_type = fields.Selection(_type_selection_list, string='Type', default='none', store=True)
     cdt = fields.Char(string='CDT', store=True)
     temperatur_type = fields.Selection(_temperature_selection_list, string='Temperature', required=True, store=True)
-
     famille = fields.Selection(_famille_selection_list, string='Famille', default='none', store=True)
-
-    quantity_pi = fields.Integer(string='Quantity PI', store=True)
-    tarif_douane = fields.Char(string='Tarif Douanlier', store=True)
-
-    @api.onchange('quantity_pi')
-    def _compute_quantity_pi(self):
-        if not (self.quantity_pi):
-            return
-        if self.quantity_pi < 0 :
-            return {'warning' :{
-                'title':"Incorrect Intiger value",
-                'message':"La valeur est negative",
-            }}
-
-    @api.constrains('cdt', 'quantity_pi')
-    def _check_dates(self):
-        if self.cdt < 0 or self.quantity_pi < 0 :
-            raise ValidationError(_('Error ! La valeur de CDT et/ou Quantite PI sont negatives.'))
