@@ -41,7 +41,7 @@ class StockCardReportWizard(models.TransientModel):
                 SELECT move.date, move.product_id, stock_move_line.qty_done,
                     move.product_uom_qty, move.product_uom, move.reference,
                     move.location_id,move.location_dest_id,move.name,
-                    move.partner_id,stock_move_line.ref,stock_move_line.expiry_date
+                    move.partner_id
                 FROM stock_move move
                 INNER JOIN stock_move_line on move.id = stock_move_line.move_id
 				INNER JOIN stock_location on move.location_id = stock_location.id
@@ -63,14 +63,12 @@ class StockCardReportWizard(models.TransientModel):
                 'location_id':line.get("location_id"),
                 'location_dest_id': line.get("location_dest_id"),
                 'reference': line.get("reference"),
-                'expiry_date': line.get("expiry_date"),
-                'ref':line.get("ref"),
                 }
             self.env['card.tree'].create(result)
 
     def button_export_tree(self):
         self.ensure_one()
-        action = self.env.ref('stock_card_report.action_stock_card_tree')
+        action = self.env.ref('cts_stock_card_report.action_stock_card_tree')
         vals = action.read()[0]
         self._compute_results()
         return vals
