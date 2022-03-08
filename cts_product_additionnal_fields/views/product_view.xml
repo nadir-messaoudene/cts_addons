@@ -13,7 +13,6 @@
                 <field name="famille"/>
                 <field name="cdt"/>
                 <field name="quantity_pi"/>
-                <field name="tarif_douane"/>
             </field>
         </field>
     </record>

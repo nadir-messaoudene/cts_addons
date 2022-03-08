@@ -47,4 +47,3 @@ class ProductTemplate(models.Model):
     famille = fields.Selection(_famille_selection_list, string='Famille', default='none', store=True)
 
     quantity_pi = fields.Integer(string='Quantity PI', store=True)
-    tarif_douane = fields.Char(string='Tarif Douanlier', store=True)
